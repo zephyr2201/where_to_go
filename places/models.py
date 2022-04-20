@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils.html import mark_safe
+from tinymce.models import HTMLField
 
 from places.utils import file_path
 
@@ -13,7 +15,7 @@ class Location(models.Model):
     description_short = models.TextField(
         null=True, blank=True
     )
-    description_long = models.TextField(
+    description_long = HTMLField(
         null=True, blank=True
     )
 
@@ -37,6 +39,12 @@ class LocationPhoto(models.Model):
         null=True, blank=True,
         related_name='images'
     )
+
+    @property
+    def image_tag(self):
+        if self.file:
+            return mark_safe('<img src="{}" width="300" height="300" />'.format(self.file.url))
+        return ""
 
     def __str__(self) -> str:
         return 'Фото-' + self.location.title

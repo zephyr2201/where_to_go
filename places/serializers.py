@@ -18,7 +18,7 @@ class LocationDetailSerializer(serializers.ModelSerializer):
         photos = obj.images.all()
         if photos:
             for photo in photos:
-                imgs.append(settings.LOCAL_ADDRESS + '/media/' + photo.file.name)
+                imgs.append(settings.LOCAL_ADDRESS + photo.file.url)
         return imgs
 
     def get_coordinates(self, obj) -> Dict:

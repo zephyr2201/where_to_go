@@ -13,9 +13,16 @@ class Location(models.Model):
     description_short = models.TextField(
         null=True, blank=True
     )
+    description_long = models.TextField(
+        null=True, blank=True
+    )
 
     def __str__(self) -> str:
         return self.title
+ 
+    class Meta:
+        verbose_name = "Локация"
+        verbose_name_plural = "Локаций"
 
 
 class LocationPhoto(models.Model):
@@ -31,6 +38,13 @@ class LocationPhoto(models.Model):
         related_name='images'
     )
 
+    def __str__(self) -> str:
+        return 'Фото-' + self.location.title
+
+    class Meta:
+        verbose_name = "Фото локаций"
+        verbose_name_plural = "Фото локаций"
+
 
 class Coordinates(models.Model):
     langitude = models.CharField(
@@ -44,5 +58,10 @@ class Coordinates(models.Model):
     location = models.OneToOneField(
         Location,
         on_delete=models.SET_NULL,
-        null=True, blank=True
+        null=True, blank=True,
+        related_name='coordinates'
     )
+
+    class Meta:
+        verbose_name = "Координаты локаций"
+        verbose_name_plural = "Координаты локаций"

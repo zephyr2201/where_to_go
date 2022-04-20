@@ -127,3 +127,5 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = os.getenv("MEDIA_URL", "/media/")
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", os.path.join(BASE_DIR, "media"))
+
+LOCAL_ADDRESS = os.getenv("LOCAL_ADDRESS", "http://0.0.0.0:8001")

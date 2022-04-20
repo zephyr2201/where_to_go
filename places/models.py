@@ -14,6 +14,9 @@ class Location(models.Model):
         null=True, blank=True
     )
 
+    def __str__(self) -> str:
+        return self.title
+
 
 class LocationPhoto(models.Model):
     file = models.ImageField(
